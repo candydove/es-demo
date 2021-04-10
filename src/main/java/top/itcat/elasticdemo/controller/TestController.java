@@ -1,19 +1,13 @@
 package top.itcat.elasticdemo.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import org.apache.lucene.index.IndexReader;
-import org.elasticsearch.action.index.IndexRequest;
-import org.elasticsearch.client.RequestOptions;
-import org.elasticsearch.client.RestHighLevelClient;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import top.itcat.elasticdemo.service.ITestService;
 
 import javax.annotation.Resource;
-import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +16,7 @@ import java.util.Map;
  * @author yan.zhang
  * @date 2021/1/4
  */
-@RestController
+@Controller
 @RequestMapping("/test")
 public class TestController {
 
@@ -56,4 +50,10 @@ public class TestController {
         return testService.searchPage(keywords, pageNum, pageSize);
     }
 
+    @GetMapping("/index")
+    public String index(Model model){
+        model.addAttribute("hello", "你好妞妞！");
+        model.addAttribute("users", Arrays.asList("张三","李四","王五"));
+        return "success";
+    }
 }
